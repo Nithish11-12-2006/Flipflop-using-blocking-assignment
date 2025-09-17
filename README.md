@@ -28,20 +28,50 @@ Blocking assignments execute sequentially in the given order, which makes it eas
 
 ### SR Flip-Flop (Blocking)
 ```verilog
-module sr_ff (
-    input wire S, R, clk,
-    output reg Q
-);
-    always @(posedge clk) begin
+module srff(s,r,clk,rst,q);
+input s,r,clk,rst;
+output reg q;
 
+always @(posedge clk)   
+begin
+  if(rst==1)
+    q = 0;
+  else if(s==0 && r==0)   
+    q = q;                
+  else if(s==0 && r==1)
+    q = 1'b0;
+  else if(s==1 && r==0)
+    q = 1'b1;
+  else
+    q = 1'bx;  
+end 
+endmodule   
 
-
-endmodule
 ```
 ### SR Flip-Flop Test bench 
 ```verilog
 
+`timescale 1ns/1ps
+module tb_srff;
+reg s,r,clk,rst;
+wire q;
 
+
+srff uut(s,r,clk,rst,q);
+
+always #5 clk = ~clk;
+
+initial begin
+  clk=0; s=0; r=0; rst=1;
+  #10 rst=0;
+  #10 s=1; r=0;
+  #10 s=0; r=0;
+  #10 s=0; r=1;
+  #10 s=1; r=1;
+  #10 s=0; r=0;
+  #20 $finish;   
+end
+endmodule
 
 ```
 #### SIMULATION OUTPUT
@@ -51,20 +81,44 @@ endmodule
 
 ### JK Flip-Flop (Blocking)
 ```verilog
-module jk_ff (
-    input wire J, K, clk,
-    output reg Q
-);
-    always @(posedge clk) begin
-
-
-
+module jk_ff(s,r,clk,rst,q);
+input s,r,clk,rst;
+output reg q;
+always @(posedge clk)
+begin
+if(rst==1)
+q = 0;
+else if(s==0 && r==0)
+q = q;
+else if(s==1 && r==1)
+q = 1'b0;
+else if(s==1 && r==0)
+q = 1'b1;
+else
+q = ~q;
+end
 endmodule
+
 ```
 ### JK Flip-Flop Test bench 
 ```verilog
-
-
+module tb_jk_ff;
+reg s,r,clk,rst;
+wire q;
+jk_ff uut(s,r,clk,rst,q);
+always #5clk = ~clk;
+initial
+begin
+clk=0;s=0;r=0;rst=1;
+#10 rst=0;
+#10 s=1;r=0;
+#10 s=0;r=0;
+#10 s=0;r=1;
+#10 s=1;r=1;
+#10 s=0;r=0;
+#20  $finish;
+end
+endmodule
 
 ```
 #### SIMULATION OUTPUT
