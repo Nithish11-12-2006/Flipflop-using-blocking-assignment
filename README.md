@@ -45,8 +45,8 @@ endmodule
 
 ```
 #### SIMULATION OUTPUT
+<img width="1920" height="1200" alt="sr_ff" src="https://github.com/user-attachments/assets/c15393a5-9153-40a0-9afe-1e95870e0859" />
 
-------- paste the output here -------
 ---
 
 ### JK Flip-Flop (Blocking)
@@ -69,7 +69,8 @@ endmodule
 ```
 #### SIMULATION OUTPUT
 
-------- paste the output here -------
+<img width="1920" height="1200" alt="jk_ff" src="https://github.com/user-attachments/assets/073557c6-0b79-43d2-93cc-5f1cfa11be20" />
+
 ---
 ### D Flip-Flop (Blocking)
 ```verilog
