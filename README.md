@@ -123,7 +123,8 @@ endmodule
 ```
 #### SIMULATION OUTPUT
 
-<img width="1920" height="1200" alt="jk_ff" src="https://github.com/user-attachments/assets/073557c6-0b79-43d2-93cc-5f1cfa11be20" />
+<img width="1920" height="1200" alt="jk_ff" src="https://github.com/user-attachments/assets/9ac23d90-1584-4459-93b4-dec5590a22a0" />
+
 
 ---
 ### D Flip-Flop (Blocking)
