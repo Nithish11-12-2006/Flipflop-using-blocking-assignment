@@ -81,18 +81,18 @@ endmodule
 
 ### JK Flip-Flop (Blocking)
 ```verilog
-module jk_ff(s,r,clk,rst,q);
-input s,r,clk,rst;
+module jk_ff(j,k,clk,rst,q);
+input j,k,clk,rst;
 output reg q;
 always @(posedge clk)
 begin
 if(rst==1)
 q = 0;
-else if(s==0 && r==0)
+else if(j==0 && k==0)
 q = q;
-else if(s==1 && r==1)
+else if(j==1 && k==1)
 q = 1'b0;
-else if(s==1 && r==0)
+else if(j==1 && k==0)
 q = 1'b1;
 else
 q = ~q;
@@ -102,20 +102,21 @@ endmodule
 ```
 ### JK Flip-Flop Test bench 
 ```verilog
+
 module tb_jk_ff;
-reg s,r,clk,rst;
+reg j,k,clk,rst;
 wire q;
-jk_ff uut(s,r,clk,rst,q);
+jk_ff uut(j,k,clk,rst,q);
 always #5clk = ~clk;
 initial
 begin
-clk=0;s=0;r=0;rst=1;
+clk=0;j=0;k=0;rst=1;
 #10 rst=0;
-#10 s=1;r=0;
-#10 s=0;r=0;
-#10 s=0;r=1;
-#10 s=1;r=1;
-#10 s=0;r=0;
+#10 j=1;k=0;
+#10 j=0;k=0;
+#10 j=0;k=1;
+#10 j=1;k=1;
+#10 j=0;k=0;
 #20  $finish;
 end
 endmodule
